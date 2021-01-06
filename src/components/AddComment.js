@@ -12,11 +12,12 @@ export default function AddComment({postId, setComments}) {
           })
           .then(function (response) {
             console.log(response);
-            setAuthor("")
-            setBody("")
-            // if(response.data.success) {
-            //     setComments(currComments => currComments.push({author, body}))
-            // }
+            
+            if(response.data.comment) {
+                setComments(currComments => [...currComments, response.data.comment])
+                setAuthor("")
+                setBody("")
+            }
           })
           .catch(function (error) {
             console.log(error);
