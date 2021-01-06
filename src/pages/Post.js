@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useParams} from "react-router-dom"
 import axios from "axios"
 import AddComment from "../components/AddComment"
+require("dotenv").config()
 export default function Post() {
     const [post, setPost] = useState({})
     const [comments, setComments] = useState([])
@@ -21,8 +22,8 @@ export default function Post() {
             <p>{JSON.stringify(params)}</p>
             {loading && <h2>Loading....</h2>}
             {!loading && <h3>Post: {JSON.stringify(post)}</h3>}
-            {!loading && comments.map((comment,i) => <h4>Comment no.  {i+1} {JSON.stringify(comment)}</h4>)}
-            {!loading && <AddComment postId={params.postId}/>}
+            {!loading && comments.map((comment,i) => <h4 key={comment._id}>Comment no.  {i+1} {JSON.stringify(comment)}</h4>)}
+            {!loading && <AddComment postId={params.postId} setComments={setComments}/>}
         </div>
     )
 }
