@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
-import PostCard from "../components/PostCard"
+import PostPreview from "../components/PostPreview"
 export default function Home() {
-    
+
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -16,8 +16,9 @@ export default function Home() {
   }, [])
     return (
         <div className="App">
+            <h1>Blog</h1>
             {loading && <h2>Loading...</h2>}
-            {!loading && posts.map(post => <PostCard key={post._id} post={post}/>)}
+            {!loading && posts.map(post => <PostPreview key={post._id} post={post}/>)}
       </div>
     )
 }

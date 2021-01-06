@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {useParams} from "react-router-dom"
 import axios from "axios"
 import AddComment from "../components/AddComment"
+import PostCard from '../components/PostCard'
+import Comment from "../components/Comment"
 require("dotenv").config()
 export default function Post() {
     const [post, setPost] = useState({})
@@ -18,11 +20,10 @@ export default function Post() {
     }, [params.postId])
     
     return (
-        <div>
-            <p>{JSON.stringify(params)}</p>
+        <div className="post-wrapper">
             {loading && <h2>Loading....</h2>}
-            {!loading && <h3>Post: {JSON.stringify(post)}</h3>}
-            {!loading && comments.map((comment,i) => <h4 key={comment._id}>Comment no.  {i+1} {JSON.stringify(comment)}</h4>)}
+            {!loading && <PostCard post={post}/>}
+            {!loading && comments.map((comment,i) => <Comment key={comment._id} comment={comment}/>)}
             {!loading && <AddComment postId={params.postId} setComments={setComments}/>}
         </div>
     )

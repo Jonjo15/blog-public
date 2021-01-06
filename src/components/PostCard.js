@@ -1,12 +1,16 @@
 import React from 'react'
-import {Link} from "react-router-dom"
+import dayjs from "dayjs"
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 export default function PostCard({post}) {
-    let linkString = "/posts/" + post._id
     return (
-        
-        <div>
-            <Link to={linkString}><h2>{post.title} by {post.author.first_name} {post.author.family_name}</h2></Link>
+        <div className="post-card">
+            <h1>{post.title}</h1>
+            <h2>{post.author.first_name} {post.author.family_name}</h2>
+            <small>{dayjs(post.createdAt).fromNow()}</small>
+            <p>{post.body}</p>
+            <small>Email the author at {post.author.email}</small>
         </div>
     )
 }
